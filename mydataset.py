@@ -1,25 +1,22 @@
-import torch
-from torch.utils.data import Dataset, DataLoader
 import os
-from numpy.random import choice as npc
-import numpy as np
-import time
 import random
-import torchvision.datasets as dset
+
+import numpy as np
+import torch
 from PIL import Image
+from torch.utils.data import Dataset
 
 
-class OmniglotTrain(Dataset):
+class FaceRecognitionDataset(Dataset):
 
     def __init__(self, dataPath, transform=None):
-        super(OmniglotTrain, self).__init__()
+        super(FaceRecognitionDataset, self).__init__()
         np.random.seed(0)
-        # self.dataset = dataset
         self.transform = transform
         self.datas, self.num_classes = self.loadToMem(dataPath)
 
     def loadToMem(self, dataPath):
-        print("begin loading training dataset to memory")
+        print("Begin loading training dataset to memory")
         datas = {}
         agrees = [0, 90, 180, 270]
         idx = 0
@@ -27,15 +24,14 @@ class OmniglotTrain(Dataset):
             for alphaPath in os.listdir(dataPath):
                 for charPath in os.listdir(os.path.join(dataPath, alphaPath)):
                     datas[idx] = []
-                    for samplePath in os.listdir(os.path.join(dataPath, alphaPath, charPath)):
-                        filePath = os.path.join(dataPath, alphaPath, charPath, samplePath)
-                        datas[idx].append(Image.open(filePath).rotate(agree).convert('L'))
-                    idx += 1
-        print("finish loading training dataset to memory")
+                    file_path = os.path.join(dataPath, alphaPath, charPath)
+                    datas[idx].append(Image.open(file_path).rotate(agree).convert('L'))
+                idx += 1
+        print("Finish loading training dataset to memory")
         return datas, idx
 
     def __len__(self):
-        return  21000000
+        return 21000000
 
     def __getitem__(self, index):
         # image1 = random.choice(self.dataset.imgs)
@@ -83,10 +79,9 @@ class OmniglotTest(Dataset):
         for alphaPath in os.listdir(dataPath):
             for charPath in os.listdir(os.path.join(dataPath, alphaPath)):
                 datas[idx] = []
-                for samplePath in os.listdir(os.path.join(dataPath, alphaPath, charPath)):
-                    filePath = os.path.join(dataPath, alphaPath, charPath, samplePath)
-                    datas[idx].append(Image.open(filePath).convert('L'))
-                idx += 1
+                file_path = os.path.join(dataPath, alphaPath, charPath)
+                datas[idx].append(Image.open(file_path).convert('L'))
+            idx += 1
         print("finish loading test dataset to memory")
         return datas, idx
 
@@ -115,6 +110,6 @@ class OmniglotTest(Dataset):
 
 
 # test
-if __name__=='__main__':
-    omniglotTrain = OmniglotTrain('./images_background', 30000*8)
+if __name__ == '__main__':
+    omniglotTrain = FaceRecognitionDataset('E:\\myWorkspace\\datasets\\personas\\train', 30000 * 8)
     print(omniglotTrain)
