@@ -8,3 +8,6 @@ Siamese Neural Networks take two samples as input and outputs a probability for 
 Input samples pass through identical CNNs (with shared weights), and their embeddings are compared in the cost function.
 Here, a **contrastive loss function** is used to find the similarity between the image pair. Its formula is (Y - label, Dw - euclidian distance, m - margin):
 ![GitHub Logo](/images/contrastive_loss.jpeg)
+
+## Result
+![GitHub Logo](/images/result-example.png)
