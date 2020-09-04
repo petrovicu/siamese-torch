@@ -10,4 +10,8 @@ Here, a **contrastive loss function** is used to find the similarity between the
 ![GitHub Logo](/images/contrastive_loss.jpeg)
 
 ## Result
-![GitHub Logo](/images/result-example.png)
+Huge similarity:
+![GitHub Logo](/images/result_similar.png)
+
+No similarity:
+![GitHub Logo](/images/result_not_similar.png)
