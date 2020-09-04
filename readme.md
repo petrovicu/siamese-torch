@@ -12,8 +12,6 @@ Here, a **contrastive loss function** is used to find the similarity between the
 ## Results
 Huge similarity:
 ![GitHub Logo](/images/result_similar.png)
-Format: ![Alt Text](url)
 
 No similarity:
 ![GitHub Logo](/images/result_not_similar.png)
-Format: ![Alt Text](url)
