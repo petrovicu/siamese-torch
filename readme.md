@@ -9,9 +9,11 @@ Input samples pass through identical CNNs (with shared weights), and their embed
 Here, a **contrastive loss function** is used to find the similarity between the image pair. Its formula is (Y - label, Dw - euclidian distance, m - margin):
 ![GitHub Logo](/images/contrastive_loss.jpeg)
 
-## Result
+## Results
 Huge similarity:
 ![GitHub Logo](/images/result_similar.png)
+Format: ![Alt Text](url)
 
 No similarity:
 ![GitHub Logo](/images/result_not_similar.png)
+Format: ![Alt Text](url)
