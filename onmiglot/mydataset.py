@@ -7,10 +7,10 @@ from PIL import Image
 from torch.utils.data import Dataset
 
 
-class FaceRecognitionDataset(Dataset):
+class FaceRecognitionTrainDataset(Dataset):
 
     def __init__(self, dataPath, transform=None):
-        super(FaceRecognitionDataset, self).__init__()
+        super(FaceRecognitionTrainDataset, self).__init__()
         np.random.seed(0)
         self.transform = transform
         self.datas, self.num_classes = self.loadToMem(dataPath)
@@ -60,11 +60,11 @@ class FaceRecognitionDataset(Dataset):
         return image1, image2, torch.from_numpy(np.array([label], dtype=np.float32))
 
 
-class OmniglotTest(Dataset):
+class FaceRecognitionTestDataset(Dataset):
 
     def __init__(self, dataPath, transform=None, times=200, way=20):
         np.random.seed(1)
-        super(OmniglotTest, self).__init__()
+        super(FaceRecognitionTestDataset, self).__init__()
         self.transform = transform
         self.times = times
         self.way = way
@@ -111,5 +111,5 @@ class OmniglotTest(Dataset):
 
 # test
 if __name__ == '__main__':
-    omniglotTrain = FaceRecognitionDataset('E:\\myWorkspace\\datasets\\personas\\train', 30000 * 8)
-    print(omniglotTrain)
+    facesTrain = FaceRecognitionTrainDataset('/home/wingman2/datasets/personas/test', 30000 * 8)
+    print(facesTrain)
