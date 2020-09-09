@@ -1,7 +1,10 @@
+from typing import Any
+
 from torch import nn
 
 
 class SiameseNetwork(nn.Module):
+
     def __init__(self):
         super(SiameseNetwork, self).__init__()
         self.cnn1 = nn.Sequential(
@@ -19,7 +22,6 @@ class SiameseNetwork(nn.Module):
             nn.Conv2d(8, 8, kernel_size=3),
             nn.ReLU(inplace=True),
             nn.BatchNorm2d(8),
-
         )
 
         self.fc1 = nn.Sequential(
@@ -29,7 +31,8 @@ class SiameseNetwork(nn.Module):
             nn.Linear(500, 500),
             nn.ReLU(inplace=True),
 
-            nn.Linear(500, 5))
+            nn.Linear(500, 5)
+        )
 
     def forward_once(self, x):
         output = self.cnn1(x)
@@ -41,3 +44,6 @@ class SiameseNetwork(nn.Module):
         output1 = self.forward_once(input1)
         output2 = self.forward_once(input2)
         return output1, output2
+
+    def _forward_unimplemented(self, *input: Any) -> None:
+        pass

@@ -12,10 +12,11 @@ import torch.nn.functional as F
 
 class Config():
     testing_dir = "/home/wingman2/datasets/personas/test/"
+    # testing_dir = "/home/wingman2/code/Facial-Similarity-with-Siamese-Networks-in-Pytorch/data/faces/testing/"
 
 
 model = SiameseNetwork().cuda()
-model.load_state_dict(torch.load('/home/wingman2/models/siamese-faces-180.pt'))
+model.load_state_dict(torch.load('/home/wingman2/models/siamese-faces-160.pt'))
 model.eval()
 
 data_transforms_test = transforms.Compose([

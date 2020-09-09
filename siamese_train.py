@@ -9,11 +9,16 @@ import matplotlib.pyplot as plt
 from siamese_network import SiameseNetwork
 from contrastive_loss import ContrastiveLoss
 from helpers import show_plot, imshow
+from torch.utils.tensorboard import SummaryWriter
+
+
+# default `log_dir` is "runs" - we'll be more specific here
+writer = SummaryWriter('/home/wingman2/runs/face_siamese_experiment_2')
 
 
 class Config():
     training_dir = "/home/wingman2/datasets/personas/train/"
-    testing_dir = "/home/wingman2/datasets/personas/test/"
+    # training_dir = "/home/wingman2/code/Facial-Similarity-with-Siamese-Networks-in-Pytorch/data/faces/training/"
     train_batch_size = 64
     train_number_epochs = 200
 
@@ -62,6 +67,7 @@ for epoch in range(0, Config.train_number_epochs):
         optimizer.zero_grad()
         output1, output2 = net(img0, img1)
         loss_contrastive = criterion(output1, output2, label)
+        writer.add_scalar("Contrastive loss/train", loss_contrastive, epoch)
         loss_contrastive.backward()
         optimizer.step()
         if i % 10 == 0:
@@ -75,5 +81,6 @@ for epoch in range(0, Config.train_number_epochs):
 
 # Save final model
 torch.save(net.state_dict(), '/home/wingman2/models/siamese-faces-final.pt')
+writer.close()
 
 show_plot(counter, loss_history)
